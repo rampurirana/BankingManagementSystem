@@ -40,7 +40,7 @@ public class Login extends JFrame implements ActionListener {
 
         //Display the Card NO. Area
         label2 = new JLabel("Card No.");
-        label2.setFont(new Font("Ralway", Font.BOLD, 28));
+        label2.setFont(new Font("Raleway", Font.BOLD, 28));
         label2.setForeground(Color.white);
         label2.setBounds(180, 190, 375, 30);
         add(label2);
@@ -53,7 +53,7 @@ public class Login extends JFrame implements ActionListener {
 
         //Display the Pin No. Area
         label3 = new JLabel("PIN NO.");
-        label3.setFont(new Font("Ralway", Font.BOLD ,28));
+        label3.setFont(new Font("Raleway", Font.BOLD ,28));
         label3.setForeground(Color.white);
         label3.setBounds(180, 235, 375, 30);
         add(label3);
