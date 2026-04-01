@@ -94,7 +94,7 @@ public class Signup extends JFrame implements ActionListener {
 
         //text input field for user gmail
         textGmail = new JTextField();
-        textGmail.setFont(new Font("Raleway", Font.BOLD, 20));
+        textGmail.setFont(new Font("Raleway", Font.BOLD, 14));
         textGmail.setBounds(300, 260, 400, 30);
         add(textGmail);
 
@@ -180,7 +180,7 @@ public class Signup extends JFrame implements ActionListener {
 
         //text input field for user address
         textAddress = new JTextField();
-        textAddress.setFont(new Font("Raleway", Font.BOLD, 20));
+        textAddress.setFont(new Font("Raleway", Font.BOLD, 14));
         textAddress.setBounds(300, 420, 400, 30);
         add(textAddress);
 
@@ -192,7 +192,7 @@ public class Signup extends JFrame implements ActionListener {
 
         //text input field for user city
         textCity = new JTextField();
-        textCity.setFont(new Font("Raleway", Font.BOLD, 20));
+        textCity.setFont(new Font("Raleway", Font.BOLD, 14));
         textCity.setBounds(300, 460, 400, 30);
         add(textCity);
 
@@ -204,7 +204,7 @@ public class Signup extends JFrame implements ActionListener {
 
         //text input field for user district
         textDistrict = new JTextField();
-        textDistrict.setFont(new Font("Raleway", Font.BOLD, 20));
+        textDistrict.setFont(new Font("Raleway", Font.BOLD, 14));
         textDistrict.setBounds(300, 500, 400, 30);
         add(textDistrict);
 
@@ -216,7 +216,7 @@ public class Signup extends JFrame implements ActionListener {
 
         //text input field for user state
         textState = new JTextField();
-        textState.setFont(new Font("Raleway", Font.BOLD, 20));
+        textState.setFont(new Font("Raleway", Font.BOLD, 14));
         textState.setBounds(300, 540, 400, 30);
         add(textState);
 
@@ -228,7 +228,7 @@ public class Signup extends JFrame implements ActionListener {
 
         //text input field for user pin code
         textPinCode = new JTextField();
-        textPinCode.setFont(new Font("Raleway", Font.BOLD, 20));
+        textPinCode.setFont(new Font("Raleway", Font.BOLD, 14));
         textPinCode.setBounds(300, 580, 400, 30);
         add(textPinCode);
 
@@ -251,7 +251,52 @@ public class Signup extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String fornNo = first;
+        String name = textName.getText();
+        String fName = textFatherName.getText();
+        String mName = textMotherName.getText();
+        String dob = ((JTextField) dateChooser.getDateEditor().getUiComponent()).getText();
 
+        String gen = null;
+        if(r1.isSelected()){
+            gen = "Male";
+        } else if(r2.isSelected()){
+            gen = "Female";
+        } else if(r3.isSelected()) {
+            gen = "Other";
+        }
+
+        String email = textGmail.getText();
+
+        String married = null;
+        if(m1.isSelected()){
+            married = "Married";
+        } else if(m2.isSelected()) {
+            married = "Un Married";
+        } else if(m3.isSelected()) {
+            married = "Other";
+        }
+
+        String address = textAddress.getText();
+        String city = textCity.getText();
+        String district = textDistrict.getText();
+        String state = textState.getText();
+        String pinCode = textPinCode.getText();
+
+        try{
+            if(textName.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Please enter all data");
+            } else {
+                Conn con1 = new Conn();
+                String q = "insert into signupData values('"+fornNo+"', '"+name+"', '"+fName+"', '"+mName+"', '"+dob+"', '"+gen+"', '"+email+"', '"+married+"', '"+address+"', '"+city+"', '"+district+"', '"+state+"', '"+pinCode+"')";
+                con1.statement.executeUpdate(q);
+                new Signup2();
+                setVisible(false);
+            }
+
+        } catch (Exception E){
+            E.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
