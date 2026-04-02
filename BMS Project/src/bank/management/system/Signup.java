@@ -251,6 +251,7 @@ public class Signup extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        //Creating string data type every textfield for store data
         String fornNo = first;
         String name = textName.getText();
         String fName = textFatherName.getText();
@@ -283,6 +284,7 @@ public class Signup extends JFrame implements ActionListener {
         String state = textState.getText();
         String pinCode = textPinCode.getText();
 
+        //Exception handling for store every input data in databases and also handle the exception
         try{
             if(textName.getText().equals("")){
                 JOptionPane.showMessageDialog(null, "Please enter all data");
@@ -290,7 +292,7 @@ public class Signup extends JFrame implements ActionListener {
                 Conn con1 = new Conn();
                 String q = "insert into signupData values('"+fornNo+"', '"+name+"', '"+fName+"', '"+mName+"', '"+dob+"', '"+gen+"', '"+email+"', '"+married+"', '"+address+"', '"+city+"', '"+district+"', '"+state+"', '"+pinCode+"')";
                 con1.statement.executeUpdate(q);
-                new Signup2();
+                new Signup2(first);
                 setVisible(false);
             }
 
