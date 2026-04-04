@@ -110,6 +110,7 @@ public class Login extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
+            //Performing the all three buttons according the button work
             if(e.getSource() == button1){
 
             } else if(e.getSource() == button2){
