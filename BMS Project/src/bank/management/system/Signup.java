@@ -244,7 +244,7 @@ public class Signup extends JFrame implements ActionListener {
         //Design the frame size of the Signup page
         getContentPane().setBackground(new Color(222, 255, 228));
         setLayout(null);
-        setSize(850, 800);
+        setSize(850, 730);
         setLocation(360, 40);
         setVisible(true);
     }

@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class Signup3 extends JFrame implements ActionListener {
 
@@ -12,7 +13,7 @@ public class Signup3 extends JFrame implements ActionListener {
     JCheckBox c1, c2, c3, c4, c5, c6;
     JButton submit, cancel;
 
-    Signup3(){
+    Signup3(String formNo){
         super("APPLICATION FORM");
 
         //Set the size of the bank in the frame
@@ -194,7 +195,7 @@ public class Signup3 extends JFrame implements ActionListener {
         //Implement the page form details
         getContentPane().setBackground(new Color(215, 252, 252));
         setLayout(null);
-        setSize(850, 800);
+        setSize(850, 580);
         setLocation(360, 40);
         setVisible(true);
 
@@ -203,9 +204,65 @@ public class Signup3 extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        //Creating string data type every textfield for store data
+        String accType = null;
+        if (r1.isSelected()){
+            accType = "Saving Account";
+        } else if(r2.isSelected()){
+            accType = "Current Account";
+        } else if (r3.isSelected()){
+            accType = "Salary Account";
+        }
+
+        //Generate the random card number
+        Random ran = new Random();
+        long first7 = (ran.nextLong() % 90000000L) + 8757626000000000L;
+        String cardNo = "" + Math.abs(first7);
+
+        long first3 = (ran.nextLong() % 9000L) + 1000L;
+        String pin = "" + Math.abs(first3);
+
+        String service = "";
+        if (c1.isSelected()){
+            service += "ATM Card";
+        } else if (c2.isSelected()){
+            service += "Internet Banking";
+        } else if (c3.isSelected()){
+            service += "Mobile Banking";
+        } else if (c4.isSelected()){
+            service += "EMAIL Alert";
+        } else if (c5.isSelected()){
+            service += "Cheque Book";
+        } else if (c6.isSelected()){
+            service += "E-Statement";
+        }
+
+        try {
+            if (e.getSource() == submit){
+                if(accType.equals("")){
+                    JOptionPane.showMessageDialog(null, "Please enter all data");
+                } else {
+                    Conn con1 = new Conn();
+                    String q1 = "insert into signupDataThree values('"+formNo+"', '"+accType+"', '"+cardNo+"', '"+pin+"', '"+service+"')";
+                    String q2 = "insert into login values('"+formNo+"', '"+cardNo+"', '"+pin+"')";
+
+                    con1.statement.executeUpdate(q1);
+                    con1.statement.executeUpdate(q2);
+
+                    JOptionPane.showMessageDialog(null, "Card No : " +cardNo+ "\n Pin : " +pin);
+                    setVisible(false);
+                }
+            } else if (e.getSource() == cancel){
+                System.exit(0);
+            }
+
+        } catch (Exception E){
+            E.printStackTrace();
+        }
+
     }
 
     public static void main(String[] args) {
-        new Signup3();
+        new Signup3("");
     }
 }

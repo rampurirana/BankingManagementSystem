@@ -13,7 +13,7 @@ public class Signup2 extends JFrame implements ActionListener {
     JRadioButton r1, r2, r3, r4;
     JButton next;
 
-    Signup2(String first){
+    Signup2(String formNo){
         super("APPLICATION FORM");
 
         //Set the size of the bank in the frame
@@ -206,13 +206,52 @@ public class Signup2 extends JFrame implements ActionListener {
         //Implement the form page details
         getContentPane().setBackground(new Color(252, 208, 76));
         setLayout(null);
-        setSize(850, 800);
+        setSize(850, 600);
         setLocation(360, 40);
         setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        //Creating string data type every textfield for store data
+        String religion = (String) comboBox.getSelectedItem();
+        String category = (String) comboBox1.getSelectedItem();
+        String income = (String) comboBox2.getSelectedItem();
+        String education = (String) comboBox3.getSelectedItem();
+        String occupation = (String) comboBox4.getSelectedItem();
+
+        String panCard = textPanCard.getText();
+        String aadharCard = textAadharCard.getText();
+
+        String citizen = null;
+        if (r1.isSelected()){
+            citizen = "Yes";
+        } else if (r2.isSelected()){
+            citizen = "No";
+        }
+
+        String exisAcc = null;
+        if (r3.isSelected()){
+            exisAcc = "Yes";
+        } else if(r4.isSelected()){
+            exisAcc = "No";
+        }
+
+        try {
+            if (textPanCard.getText().equals("") || textAadharCard.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Please enter all data");
+            } else {
+                Conn con1 = new Conn();
+                String q = "insert into signupDataTwo values('"+formNo+"', '"+religion+"', '"+category+"', '"+income+"', '"+education+"', '"+occupation+"', '"+panCard+"', '"+aadharCard+"', '"+citizen+"', '"+exisAcc+"')";
+                con1.statement.executeUpdate(q);
+                new Signup3(formNo);
+                setVisible(false);
+            }
+
+        } catch (Exception E){
+            E.printStackTrace();
+        }
 
     }
 
