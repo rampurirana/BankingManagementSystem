@@ -250,6 +250,7 @@ public class Signup3 extends JFrame implements ActionListener {
                     con1.statement.executeUpdate(q2);
 
                     JOptionPane.showMessageDialog(null, "Card No : " +cardNo+ "\n Pin : " +pin);
+                    new Deposit(pin);
                     setVisible(false);
                 }
             } else if (e.getSource() == cancel){
